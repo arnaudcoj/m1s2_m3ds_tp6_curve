@@ -21,15 +21,26 @@ using namespace std;
 Vector3 Hermite::eval(double t) {
   // remplacer la matrice 4x4 identité suivante avec les valeurs correctes pour une courbe de Hermite (i.e. matrice de hermite; cf cours)
 
-  double matrix[16]={1.0,0.0,0.0,0.0,
-                     0.0,1.0,0.0,0.0,
-                     0.0,0.0,1.0,0.0,
-                     0.0,0.0,0.0,1.0};
+    //matrice de hermite
+  double matrix[16]={ 2.0, -2.0,  1.0,  1.0,
+                     -3.0,  3.0, -2.0, -1.0,
+                      0.0,  0.0,  1.0,  0.0,
+                      1.0,  0.0,  0.0,  0.0};
 
   Vector3 res(0,0,0);
   // A COMPLETER : calculer le point P(t) en utilisant les 16 coefficients de la matrice (i.e. coder explicitement le produit (t^3 t^2 t 1) matrix G : cf cours; les classes du squelette ne permettent pas de le faire directement).
 
+  Matrix4 matrice4;
+  matrice4.set(matrix);
 
+  double t3 = pow(t,3);
+  double t2 = pow(t,2);
+
+  Vector4 t3t2t1_mat(matrice4 * Vector4(t3, t2, t, 1));
+
+  res.x(t3t2t1_mat.x() * _a.x() + t3t2t1_mat.y() * _b.x() + t3t2t1_mat.z() * _ta.x() + t3t2t1_mat.w() * _tb.x());
+  res.y(t3t2t1_mat.x() * _a.y() + t3t2t1_mat.y() * _b.y() + t3t2t1_mat.z() * _ta.y() + t3t2t1_mat.w() * _tb.y());
+  res.z(t3t2t1_mat.x() * _a.z() + t3t2t1_mat.y() * _b.z() + t3t2t1_mat.z() * _ta.z() + t3t2t1_mat.w() * _tb.z());
 
   return res;
 }
