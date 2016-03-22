@@ -47,7 +47,7 @@ void CatmullRomCurve::setup() {
   // les points intermédiaires doivent être fixés par la méthode vue en cours (tangentes parallèles aux segments [point(i-1),point(i+1)]).
   if (nbPoint()<2) return;
 
-  double k = 0.4;
+  double k = 0.2;
 
   for(int i = 1; i < nbPoint() -1; i++) {
       parallele = Vector3(point(i-1), point(i+1));

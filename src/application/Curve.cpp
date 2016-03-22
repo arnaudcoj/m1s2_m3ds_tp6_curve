@@ -65,6 +65,7 @@ Vector3 Curve::evalCubicVelocity(double t) {
   if (_pts.size()!=4) throw Error("Curve should have 4 control points",__LINE__,__FILE__);
   Vector3 res;
 
+  res = point(1) + 2 * point(2) * t + 3 * point(3) * pow(2.0, t);
 
   return res;
 
@@ -75,6 +76,7 @@ Vector3 Curve::evalCubicAcceleration(double t) {
 
   Vector3 res;
 
+  res = 2 * point(2) + 6 * point(3) * t;
 
   return res;
 
