@@ -45,6 +45,17 @@ void CatmullRomCurve::setup() {
 
   // A COMPLETER : il s'agit d'initialiser les points intermédiaires (les points bleus) en appelant les setters intermediate(i,0,<un Vector3>) et intermediate(i,1,<un Vector3>) )
   // les points intermédiaires doivent être fixés par la méthode vue en cours (tangentes parallèles aux segments [point(i-1),point(i+1)]).
+  if (nbPoint()<2) return;
+
+  double k = 0.4;
+
+
+  for(int i = 1; i < nbPoint() -1; i++) {
+      parallele = Vector3(point(i-1), point(i+1));
+
+      intermediate(i, 0, point(i) + k * parallele );
+      intermediate(i - 1, 1, point(i) - k * parallele );
+  }
 
 }
 
