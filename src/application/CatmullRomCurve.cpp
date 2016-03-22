@@ -49,7 +49,6 @@ void CatmullRomCurve::setup() {
 
   double k = 0.4;
 
-
   for(int i = 1; i < nbPoint() -1; i++) {
       parallele = Vector3(point(i-1), point(i+1));
 
@@ -57,6 +56,13 @@ void CatmullRomCurve::setup() {
       intermediate(i - 1, 1, point(i) - k * parallele );
   }
 
+  //premier point
+  parallele = Vector3(point(0), intermediate(0, 1));
+  intermediate(0, 0, point(0) + k * parallele);
+
+  //dernier point
+  parallele = Vector3(point(nbPoint() - 1), intermediate(nbPoint() -2, 0));
+  intermediate(nbPoint() - 2, 1, point((nbPoint() - 1)) + k * parallele);
 }
 
 Matrix4 CatmullRomCurve::tbn(double tValue) {
