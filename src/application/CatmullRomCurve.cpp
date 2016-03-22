@@ -20,20 +20,19 @@ using namespace std;
 void CatmullRomCurve::draw() {
 
 
-  // A COMPLETER :
-  //
-  // doit tracer une courbe en reliant 2 points saisis successifs par une bézier cubique
-  // nbPoint() vous donne le nombre de points saisis
-  // on doit donc tracer nbPoint()-1 courbes de bézier cubiques : la ième courbe a pour points de controle point(i),intermediate(i,0),intermediate(i,1) et point(i+1)
-  // il suffit donc d'affecter la variable "cubic" avec ces points (affectez les points avec le setter cubic.point(j,un_point), puis de la tracer (en appelant simplement cubic.drawBezier() ).
-
-
+  //ex4 q1
   Curve cubic;
   cubic.create(4);
 
   if (nbPoint()<2) return; // tracé uniquement si plus de 2 points saisis.
 
-
+  for(int i = 0; i < nbPoint() -1; i++) {
+      cubic.point(0, point(i));
+      cubic.point(1, intermediate(i,0));
+      cubic.point(2, intermediate(i,1));
+      cubic.point(3, point(i + 1));
+      cubic.drawBezier();
+  }
 
 }
 
